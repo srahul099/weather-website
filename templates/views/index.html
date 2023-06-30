@@ -1,0 +1,40 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="img/weather.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <video autoplay loop muted plays in-line>
+      <source src="img/cloud_-_2142 (Original).mp4">
+    </video>
+    <div class="container1">
+    <div class="main-content">
+    <div class="sidetoside">
+    <div class="topbottom">
+    {{>header}}
+      <p id="desc">Use this Site to know the Weather</p>
+        <form action="">
+          <input type="text" placeholder="Location">
+          <button>Search</button>
+
+        </form>
+        </div>
+      <div class="round">
+          <p id="message1"></p>
+          <p id="message2"></p>
+          <p id="message4"></p>
+          <p id="message3"></p>
+          <p id="message5"></p>
+      </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
