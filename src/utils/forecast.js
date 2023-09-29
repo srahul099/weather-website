@@ -6,10 +6,12 @@ const forecast = (latitude, longitude, callback) => {
       callback("Unable to find location", undefined);
     } else {
       const temperature = response.body.current.temp_c;
-      const weatherDescription = response.body.current.precip_mm;
+      const weatherDescription = response.body.current.condition.text;
+      const precep_mm = response.body.current.precip_mm;
       callback(undefined, {
         temperature: `${temperature}°C`,
-        precipitation: `${weatherDescription}%`,
+        precipitation: `${weatherDescription}`,
+        precip_in_mm: `${precep_mm}`,
       });
     }
   });

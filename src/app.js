@@ -4,7 +4,7 @@ const app = express();
 const hbs = require("hbs");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
-const port=process.env.port || 3000
+const port = process.env.port || 3000;
 app.set("view engine", "hbs");
 
 const publicdomain = path.join(__dirname, "../public");
@@ -34,21 +34,26 @@ app.get("/weather", (req, res) => {
       if (error) {
         return res.send({ error });
       }
-      forecast(latitude, longitude, (error, { temperature, precipitation }) => {
-        if (error) {
-          res.send({ error });
+      forecast(
+        latitude,
+        longitude,
+        (error, { temperature, precipitation, precip_in_mm }) => {
+          if (error) {
+            res.send({ error });
+          }
+          res.send({
+            temperature: temperature,
+            precipitation: precipitation,
+            city: city,
+            country: country,
+            state: state,
+            county: county,
+            town: town,
+            address: req.query.address,
+            precip_in_mm: precip_in_mm + " mm",
+          });
         }
-        res.send({
-          temperature: temperature,
-          precipitation: precipitation,
-          city: city,
-          country: country,
-          state: state,
-          county: county,
-          town: town,
-          address: req.query.address,
-        });
-      });
+      );
     }
   );
 });
@@ -83,5 +88,5 @@ app.set("views", viewspath);
 hbs.registerPartials(partialspath);
 
 app.listen(port, () => {
-  console.log("server is up on port "+port);
+  console.log("server is up on port " + port);
 });

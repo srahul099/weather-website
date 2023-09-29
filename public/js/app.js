@@ -12,25 +12,23 @@ weatherForm.addEventListener("submit", (e) => {
   msg3.textContent = "";
   msg4.textContent = "";
   msg5.textContent = "";
-  fetch(`/weather?address=${search.value}`).then(
-    (response) => {
-      response.json().then((data) => {
-        if (data.error) {
-          msg2.textContent = data.error;
+  fetch(`/weather?address=${search.value}`).then((response) => {
+    response.json().then((data) => {
+      if (data.error) {
+        msg2.textContent = data.error;
+      } else {
+        if (!data.city) {
+          msg3.textContent = data.county;
+          console.log(data);
         } else {
-          if (!data.city) {
-            msg3.textContent = data.county;
-            console.log(data);
-          } else {
-            msg3.textContent = data.city;
-          }
-          msg5.textContent = data.country;
-          msg1.textContent = data.temperature;
-          msg4.textContent = "Rain";
-          msg2.textContent = data.precipitation;
+          msg3.textContent = data.city;
         }
-      });
-    }
-  );
+        msg5.textContent = data.country;
+        msg1.textContent = data.temperature;
+        msg4.textContent = data.precip_in_mm;
+        msg2.textContent = data.precipitation;
+      }
+    });
+  });
   console.log(search.value);
 });
